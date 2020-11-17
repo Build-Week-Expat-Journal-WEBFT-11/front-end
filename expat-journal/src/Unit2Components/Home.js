@@ -103,7 +103,7 @@ export default function Home(){
 								<li><a href="#" className="icon brands alt fa-twitter"><span className="label">Twitter</span></a></li>
 								<li><a href="#" className="icon brands alt fa-facebook-f"><span className="label">Facebook</span></a></li>
 								<li><a href="#" className="icon brands alt fa-instagram"><span className="label">Instagram</span></a></li>
-								<li><a href="#" className="icon brands alt fa-github"><span className="label">GitHub</span></a></li>
+								<li><a href="https://github.com/Build-Week-Expat-Journal-WEBFT-11" className="icon brands alt fa-github"><span className="label">GitHub</span></a></li>
 								<li><a href="#" className="icon brands alt fa-linkedin-in"><span className="label">LinkedIn</span></a></li>
 							</ul>
 							<ul className="copyright">
