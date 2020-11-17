@@ -9,14 +9,4 @@ password:yup
 .string()
 .required("Please provide a password")
 .min(4,"Password must be at least 5 characters"),
-name:yup
-.string()
-.required("Please tell us your name")
-
-
-
-
-
-
-
 })
