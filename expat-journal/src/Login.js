@@ -19,7 +19,12 @@ function LoginMenu(){
 
 
 export default function Login(props){
-    const {formValues,disabled,formErrors}=props
+    const {formValues,disabled,formErrors,change}=props
+
+    const onChange=(evt)=>{
+        const {name, value}=evt.target;
+        change(name,value)
+    }
     
     
 
@@ -39,15 +44,19 @@ export default function Login(props){
              
             <div className="col-6 col-12-xsmall">
             <label className="loginlabel">Email:
-	        <input type="email" name="email" id="demo-name" value={formValues.email} placeholder="Email" />
+	        <input type="email" name="email" id="demo-name" value={formValues.email} placeholder="Email" onChange={onChange} />
             </label>
 		    </div>
             <div className="col-6 col-12-xsmall">
             <label className="loginlabel">Password:
-	        <input type="password" name="username" id="demo-name" value={formValues.password}  placeholder="Password" />
+	        <input type="password" name="password" id="demo-name" value={formValues.password}  placeholder="Password"  onChange={onChange} />
             </label>
 		    </div>
-            <button className="primary loginbutton">Log-in</button>
+            <div className="errorsDiv">
+                <div>{formErrors.email}</div>
+                <div>{formErrors.password}</div>
+            </div>
+            <button disabled={disabled} className="primary loginbutton">Log-in</button>
             <div className="linktosignup">
                 Need an account? <a href="/signup">Sign up here.</a>
             </div>

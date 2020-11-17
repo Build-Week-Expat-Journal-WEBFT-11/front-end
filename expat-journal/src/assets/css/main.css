@@ -3991,5 +3991,7 @@ input, select, textarea {
 			margin-bottom:-.6rem;
 		}
 
-		
+		.errorsDiv{
+			color:#d94e38;
+		}
  
