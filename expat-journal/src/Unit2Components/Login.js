@@ -62,7 +62,7 @@ export default function Login(props){
           })
       }, [formValues])
 
-      const onSubmit=evt=>{
+const onSubmit=evt=>{
         evt.preventDefault()
         const loginInfo={
            
@@ -73,6 +73,7 @@ export default function Login(props){
             .then((res)=>{
                 console.log(res)
                 console.log("loginInfo",loginInfo)
+                localStorage.setItem("token",res.data.payload)
             })
             .catch((err)=>{
                 console.log(err)
