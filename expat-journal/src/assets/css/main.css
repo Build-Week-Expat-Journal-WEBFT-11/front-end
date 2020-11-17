@@ -3962,7 +3962,7 @@ input, select, textarea {
 			
 		}
 
-		.loginscreen{
+		.loginscreen, .signupscreen{
 			display:flex;
 			justify-content: center;
 			align-items:center;
@@ -3986,4 +3986,10 @@ input, select, textarea {
 			margin-top:.2rem;
 			margin-bottom:.75rem;
 		}
+		
+		.signupbutton{
+			margin-bottom:-.6rem;
+		}
+
+		
  

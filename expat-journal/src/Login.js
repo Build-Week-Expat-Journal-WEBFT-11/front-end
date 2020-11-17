@@ -1,4 +1,5 @@
 import {Route} from "react-router-dom"
+import {useState,useEffect} from "react"
 
 
 function LoginMenu(){
@@ -6,8 +7,8 @@ function LoginMenu(){
         <nav id="menu">
 						
 						<ul className="actions stacked">
-                        <li><a href="/home" className="button fit">Home</a></li>
-							<li><a href="/login" className="button primary fit">Log-in</a></li>
+                        <li><a href="/home" className="button primary fit">Home</a></li>
+							<li><a href="/login" className="button fit">Log-in</a></li>
 							<li><a href="/signup" className="button primary fit">Sign-Up</a></li>
 						</ul>
 					</nav>
@@ -15,7 +16,13 @@ function LoginMenu(){
 }
 
 
-export default function Login(){
+
+
+export default function Login(props){
+    const {formValues,disabled,formErrors}=props
+    
+    
+
     return (
     <div className="loginscreen" height="100%" width="100%">
         <header id="header" className="alt style2">
@@ -32,12 +39,12 @@ export default function Login(){
              
             <div className="col-6 col-12-xsmall">
             <label className="loginlabel">Email:
-	        <input type="email" name="email" id="demo-name" value="" placeholder="Email" />
+	        <input type="email" name="email" id="demo-name" value={formValues.email} placeholder="Email" />
             </label>
 		    </div>
             <div className="col-6 col-12-xsmall">
             <label className="loginlabel">Password:
-	        <input type="password" name="username" id="demo-name" value=""  placeholder="Password" />
+	        <input type="password" name="username" id="demo-name" value={formValues.password}  placeholder="Password" />
             </label>
 		    </div>
             <button className="primary loginbutton">Log-in</button>
