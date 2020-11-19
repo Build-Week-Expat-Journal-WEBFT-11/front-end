@@ -41,7 +41,6 @@ export default function Signup(props){
           })
         })
         .catch ((err)=>{
-          console.log(err.errors)
           setFormErrors({...formErrors,
           [name]:err.errors[0]
         })
@@ -66,7 +65,6 @@ export default function Signup(props){
         schema.isValid(formValues)
         .then((valid)=>{
           if(valid==true){
-          console.log('VALID')
         const newUser={
             name:formValues.name,
             email:formValues.email,
@@ -79,10 +77,10 @@ export default function Signup(props){
             })
             .catch((err)=>{
                 console.log(err)
-                console.log("newUser",newUser)
+                
             })
           }
-        else {console.log('INVALID')
+        else {
           setDisabled(true)
           setValidationDisplay('displayerrors')
           

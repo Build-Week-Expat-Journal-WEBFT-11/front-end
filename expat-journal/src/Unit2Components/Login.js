@@ -49,7 +49,7 @@ export default function Login(props){
           setFormErrors({...formErrors,
           [name]:err.errors[0]
         })
-        console.log("formErrors",formErrors)
+        
       })
     
       setFormValues({
@@ -68,7 +68,6 @@ const onSubmit=evt=>{
         schema.isValid(formValues)
         .then((valid)=>{
           if(valid==true){
-          console.log('VALID')
         const loginInfo={
            
             email:formValues.email,
@@ -82,10 +81,10 @@ const onSubmit=evt=>{
             })
             .catch((err)=>{
                 console.log(err)
-                console.log("loginInfo",loginInfo)
+                
             })
           }
-          else {console.log('INVALID')
+          else {
           setDisabled(true)
           setValidationDisplay('displayerrors')
           }
