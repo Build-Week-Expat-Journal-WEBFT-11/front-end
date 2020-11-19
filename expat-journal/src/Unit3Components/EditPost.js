@@ -29,6 +29,7 @@ let onSubmit = function(event){
     putChangedPost(newpost)
 
     history.push("/posts")
+    history.go(0)
 }
 
 let putChangedPost = function(newpost){
