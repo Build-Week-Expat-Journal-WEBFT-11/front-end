@@ -1,4 +1,4 @@
-import {Route} from "react-router-dom"
+import {Route,Redirect} from "react-router-dom"
 import React, {useState,useEffect} from 'react'
 import schema from "./validation/signupSchema"
 import * as yup from 'yup'
@@ -18,9 +18,15 @@ function SignupMenu(){
 }
 const initialValidationDisplay="hideerrors"
 
+
+
 export default function Signup(props){
     const {formValues,disabled,formErrors,setFormValues,setFormErrors,setDisabled}=props
     const [validationDisplay,setValidationDisplay]=useState(initialValidationDisplay)
+    const [redirectState,setRedirectState]=useState(false)
+
+    
+
 
     
 
@@ -75,8 +81,16 @@ export default function Signup(props){
                 console.log(res)
                 console.log("newUser",newUser)
             })
+            .then(()=>{
+              setRedirectState(true)
+              
+            })
             .catch((err)=>{
                 console.log(err)
+                
+               
+                
+              
                 
             })
           }
@@ -116,7 +130,9 @@ const passval=(()=>{
     
 
     return (
+      
         <div className="signupscreen">
+          {redirectState ? <Redirect to="/login"></Redirect> : null}
         <header id="header" className="alt style2">
         <a href="/home" className="logo"> <span>Home</span></a>
         <nav>
