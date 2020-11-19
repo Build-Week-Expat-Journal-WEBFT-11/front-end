@@ -3,6 +3,7 @@ import {useState,useEffect} from "react"
 import * as yup from 'yup'
 import schema from "./validation/loginSchema"
 import axios from "axios"
+import {useHistory} from "react-router-dom"
 
 
 
@@ -25,6 +26,8 @@ function LoginMenu(){
 
 export default function Login(props){
     const {formValues,disabled,formErrors,setFormValues,setFormErrors,setDisabled}=props
+
+    let history = useHistory()
     
 
     const onChange=(evt)=>{
@@ -74,6 +77,7 @@ const onSubmit=evt=>{
                 console.log(res)
                 console.log("loginInfo",loginInfo)
                 localStorage.setItem("token",res.data.payload)
+                history.push("/posts")
             })
             .catch((err)=>{
                 console.log(err)

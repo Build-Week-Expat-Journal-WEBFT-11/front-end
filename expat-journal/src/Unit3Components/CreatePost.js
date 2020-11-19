@@ -31,9 +31,14 @@ axios.post("https://expat-journal-backend2.herokuapp.com/api/posts/",newpost)
 .then(function(data){console.log(data)})
 }
 
+let onClick = function(){
+    history.push("/posts")
+}
+
     return (
         <div>
             <h1>Create Post</h1>
+            <button onClick={onClick}>Return To Posts</button>
             <form onSubmit={onSubmit}>
                 <label>Title:
                     <input
@@ -67,7 +72,7 @@ axios.post("https://expat-journal-backend2.herokuapp.com/api/posts/",newpost)
                 <br/>
 
                 <input type="submit"/>
-            </form>
+                </form>
         </div>
     )
 }
