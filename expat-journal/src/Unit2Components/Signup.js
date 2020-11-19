@@ -16,17 +16,19 @@ function SignupMenu(){
 					</nav>
     )
 }
-
+const initialValidationDisplay="hideerrors"
 
 export default function Signup(props){
     const {formValues,disabled,formErrors,setFormValues,setFormErrors,setDisabled}=props
+    const [validationDisplay,setValidationDisplay]=useState(initialValidationDisplay)
 
     
 
     const onChange=(evt)=>{
         const {name, value}=evt.target;
-        change(name,value,2)
+        change(name,value)
     }
+    
 
     const change=(name,value)=>{
         yup.reach(schema,name)
@@ -39,7 +41,7 @@ export default function Signup(props){
           })
         })
         .catch ((err)=>{
-          
+          console.log(err.errors)
           setFormErrors({...formErrors,
           [name]:err.errors[0]
         })
@@ -50,17 +52,21 @@ export default function Signup(props){
         [name]:value
       })
     }
+
+   
     
-      useEffect(()=>{
-        schema.isValid(formValues)
-          .then(valid=>{
-            setDisabled(!valid);
-          })
-      }, [formValues])
+      
 
 
-      const onSubmit=evt=>{
+    const onSubmit=evt=>{
+      if (formValues.email==="")
+  {setFormErrors({...formErrors, email:"Please provide an email address"})}
+  else{}
         evt.preventDefault()
+        schema.isValid(formValues)
+        .then((valid)=>{
+          if(valid==true){
+          console.log('VALID')
         const newUser={
             name:formValues.name,
             email:formValues.email,
@@ -75,7 +81,41 @@ export default function Signup(props){
                 console.log(err)
                 console.log("newUser",newUser)
             })
+          }
+        else {console.log('INVALID')
+          setDisabled(true)
+          setValidationDisplay('displayerrors')
+          
         }
+      })
+    }
+    
+    useEffect(()=>{
+      if(validationDisplay==='displayerrors'){
+      schema.isValid(formValues)
+        .then(valid=>{
+          setDisabled(!valid);
+        })
+      }
+      else{}
+    }, [formValues])
+
+    
+
+  useEffect(()=>{
+    if (formValues.name==="")
+    {setFormErrors({...formErrors, name:"Please tell us your name"})}
+    else{}
+    
+
+},[])
+    
+const passval=(()=>{
+  if (formValues.password==="")
+      {setFormErrors({...formErrors,password :"Please provide a password"})}
+      else{}
+})
+    
 
     return (
         <div className="signupscreen">
@@ -98,20 +138,20 @@ export default function Signup(props){
 		    </div>
             <div className="col-6 col-12-xsmall">
             <label className="loginlabel">Email:
-	        <input type="email" name="email"  value={formValues.email} placeholder="Email" onChange={onChange} />
+	        <input type="email" name="email"  value={formValues.email} placeholder="Enter Email" onChange={onChange} />
             </label>
 		    </div>
             <div className="col-6 col-12-xsmall">
             <label className="loginlabel">Password:
-	        <input type="password" name="password"  value={formValues.password} placeholder="Password" onChange={onChange} />
+	        <input type="password" name="password"  value={formValues.password} placeholder="Enter Password" onChange={onChange} />
             </label>
 		    </div>
             <div className="errorsDiv">
-                <div>{formErrors.name}</div>
-                <div>{formErrors.email}</div>
-                <div>{formErrors.password}</div>
+                <div className={validationDisplay}>{formErrors.name}</div>
+                <div className={validationDisplay}>{formErrors.email}</div>
+                <div className={validationDisplay}>{formErrors.password}</div>
             </div>
-            <button onClick={onSubmit} disabled={disabled} className="primary signupbutton">Sign up</button>
+            <button onMouseOver={passval} onClick={onSubmit} disabled={disabled} className="primary signupbutton">Sign up</button>
            
         </div>
 

@@ -3994,4 +3994,12 @@ input, select, textarea {
 		.errorsDiv{
 			color:#d94e38;
 		}
+
+		.displayerrors{
+			display:block;
+		}
+
+		.hideerrors{
+			display:none;
+		}
  
