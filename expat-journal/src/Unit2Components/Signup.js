@@ -3,6 +3,7 @@ import React, {useState,useEffect} from 'react'
 import schema from "./validation/signupSchema"
 import * as yup from 'yup'
 import axios from "axios"
+import {useHistory} from "react-router-dom"
 
 function SignupMenu(){
     return (
@@ -21,7 +22,7 @@ function SignupMenu(){
 export default function Signup(props){
     const {formValues,disabled,formErrors,setFormValues,setFormErrors,setDisabled}=props
 
-    
+    let history = useHistory()
 
     const onChange=(evt)=>{
         const {name, value}=evt.target;
@@ -70,6 +71,7 @@ export default function Signup(props){
             .then((res)=>{
                 console.log(res)
                 console.log("newUser",newUser)
+                history.push("/login")
             })
             .catch((err)=>{
                 console.log(err)

@@ -36,6 +36,10 @@ axios.put(`https://expat-journal-backend2.herokuapp.com/api/posts/${id}`,newpost
 .then(function(data){console.log(data)})
 }
 
+let onClick = function(){
+    history.push("/posts")
+}
+
 useEffect(function(){
 props.getPostById(id)
 },[])
@@ -43,6 +47,7 @@ props.getPostById(id)
     return(
         <div>
             <h1>Edit Post</h1>
+            <button onClick={onClick}>Return To Posts</button>
             <form onSubmit={onSubmit}>
                 <label>Title:
                     <input
