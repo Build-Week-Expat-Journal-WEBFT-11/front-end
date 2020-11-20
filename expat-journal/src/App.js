@@ -21,7 +21,7 @@ const initialFormErrors={
 
 }
 
-const initialDisabled=true
+const initialDisabled=false
 function App() {
   const [formValues, setFormValues]=useState(initialFormValues)
     const [formErrors, setFormErrors]=useState(initialFormErrors)

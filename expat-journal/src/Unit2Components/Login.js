@@ -22,15 +22,19 @@ function LoginMenu(){
 }
 
 
-
+const initialValidationDisplay="hideerrors"
 
 export default function Login(props){
     const {formValues,disabled,formErrors,setFormValues,setFormErrors,setDisabled}=props
 
+    const [validationDisplay,setValidationDisplay]=useState(initialValidationDisplay)
+
+
     let history = useHistory()
+
     
 
-    const onChange=(evt)=>{
+    const handleChange=(evt)=>{
         const {name, value}=evt.target;
         change(name,value)
     }
@@ -46,10 +50,12 @@ export default function Login(props){
           })
         })
         .catch ((err)=>{
+          console.log("error", err)
           
           setFormErrors({...formErrors,
           [name]:err.errors[0]
         })
+        
       })
     
       setFormValues({
@@ -58,15 +64,16 @@ export default function Login(props){
       })
     }
     
-      useEffect(()=>{
-        schema.isValid(formValues)
-          .then(valid=>{
-            setDisabled(!valid);
-          })
-      }, [formValues])
+      
 
 const onSubmit=evt=>{
+  if (formValues.email==="")
+  {setFormErrors({...formErrors, email:"Please provide an email address"})}
+  else{}
         evt.preventDefault()
+        schema.isValid(formValues)
+        .then((valid)=>{
+          if(valid==true){
         const loginInfo={
            
             email:formValues.email,
@@ -81,11 +88,46 @@ const onSubmit=evt=>{
             })
             .catch((err)=>{
                 console.log(err)
-                console.log("loginInfo",loginInfo)
+                
             })
-        }
-    
+          }
+          else {
+          setDisabled(true)
+          setValidationDisplay('displayerrors')
+          }
+        })
 
+}
+    
+        useEffect(()=>{
+          if(validationDisplay==='displayerrors'){
+          schema.isValid(formValues)
+            .then(valid=>{
+              setDisabled(!valid);
+            })
+          }
+          else{}
+        }, [formValues])
+
+
+        
+        
+
+        
+
+    useEffect(()=>{
+      if (formValues.password==="")
+      {setFormErrors({...formErrors, password:"Please provide a password"})}
+      else{}
+      
+
+  },[])
+
+
+      
+
+        
+        
     
     
     
@@ -106,17 +148,17 @@ const onSubmit=evt=>{
              
             <div className="col-6 col-12-xsmall">
             <label className="loginlabel">Email:
-	        <input type="email" name="email"  value={formValues.email} placeholder="Email" onChange={onChange} />
+	        <input id="email" type="email" name="email"  value={formValues.email} placeholder="Enter Email" onChange={handleChange} />
             </label>
 		    </div>
             <div className="col-6 col-12-xsmall">
             <label className="loginlabel">Password:
-	        <input type="password" name="password"  value={formValues.password}  placeholder="Password"  onChange={onChange} />
+	        <input id="password" type="password" name="password"  value={formValues.password}  placeholder="Enter Password"  onChange={handleChange} />
             </label>
 		    </div>
             <div className="errorsDiv">
-                <div>{formErrors.email}</div>
-                <div>{formErrors.password}</div>
+                <div className={validationDisplay}>{formErrors.email}</div>
+                <div className={validationDisplay}>{formErrors.password}</div>
             </div>
             <button onClick={onSubmit} disabled={disabled} className="primary loginbutton">Log-in</button>
             <div className="linktosignup">
