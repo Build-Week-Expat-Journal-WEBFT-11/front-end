@@ -3,6 +3,7 @@ import {useState,useEffect} from "react"
 import * as yup from 'yup'
 import schema from "./validation/loginSchema"
 import axios from "axios"
+import {useHistory} from "react-router-dom"
 
 
 
@@ -25,7 +26,12 @@ const initialValidationDisplay="hideerrors"
 
 export default function Login(props){
     const {formValues,disabled,formErrors,setFormValues,setFormErrors,setDisabled}=props
+
     const [validationDisplay,setValidationDisplay]=useState(initialValidationDisplay)
+
+
+    let history = useHistory()
+
     
 
     const handleChange=(evt)=>{
@@ -78,6 +84,7 @@ const onSubmit=evt=>{
                 console.log(res)
                 console.log("loginInfo",loginInfo)
                 localStorage.setItem("token",res.data.payload)
+                history.push("/posts")
             })
             .catch((err)=>{
                 console.log(err)
